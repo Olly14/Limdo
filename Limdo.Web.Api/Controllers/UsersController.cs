@@ -43,7 +43,7 @@ namespace Limdo.Web.Api.Controllers
         }
 
         // GET: api/Users/5
-        //[HttpGet]
+        [HttpGet]
         //[HttpGet("{id}")]
         [Route("GetUser/{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
@@ -58,11 +58,11 @@ namespace Limdo.Web.Api.Controllers
 
             return user;
         }
-        //[HttpGet]
-        [Route("api/Users/GetUserBymail/{id}")]
-        public async Task<ActionResult<UserDto>> GetUserBymail(string id)
+        [HttpGet]
+        [Route("GetByUserId/{id}")]
+        public async Task<ActionResult<UserDto>> GetByUserId(string id)
         {
-            var user = _mapper.Map<UserDto>(await _userRepository.FindUserByUserNameAsync(id));
+            var user = _mapper.Map<UserDto>(await _userRepository.FindAsync(id));
             //var user = await _context.Users.FindAsync(id);
 
             if (user == null)

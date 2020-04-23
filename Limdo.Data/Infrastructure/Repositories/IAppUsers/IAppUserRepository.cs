@@ -9,6 +9,8 @@ namespace Limdo.Data.Infrastructure.Repositories.IAppUsers
     public interface IAppUserRepository : IRepository<AppUser>
     {
         //AppUser GetUser(string username, string password);
+
+        Task<AppUser> FindByAppUserIdAsync(string id);
         bool isAdmin(Guid adminIdAsGuid, string ownerId);
         //object GetUser(string username, string password);
     }

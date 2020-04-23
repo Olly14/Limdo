@@ -10,6 +10,7 @@ namespace Limdo.Web.App.ModelMappers.AppUsers
         {
             CreateMap<AppUserDto, AppUserViewModel>().ReverseMap();
             CreateMap<UserDto, RegistratioViewModel>().ReverseMap();
+            CreateMap<UserDto, UserViewModel>().ReverseMap();
         }
 
     }

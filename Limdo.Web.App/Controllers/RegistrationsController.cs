@@ -18,13 +18,16 @@ namespace Limdo.Web.App.Controllers
     {
         private const string Registration_BaseUri = "Users";
         private const string Registration_EmailUri = "Users/GetUserBymail";
+        private const string User_ByUserIdUri = "Users/GetByUserId";
         private const string Registration_UserUri = "Users/GetUser";
 
         private const string Genders_Uri = "DropDownLists/GetGenders";
         private const string DDL_Uri = "DropDownLists";
         private const string Countries_Uri = "DropDownLists/GetCountries";
 
-        private const string Registration_AppUserUri = "AppUsers";
+        private const string Base_AppUserUri = "AppUsers";
+        private const string AppUsers_Post = "AppUsers/PostAppUser";
+        private const string Base_GetAppUserUri = "AppUsers/GetByAppUserId";
 
         private readonly IMapper _mapper;
         private readonly IApiClient _apiClient;
@@ -56,9 +59,10 @@ namespace Limdo.Web.App.Controllers
                 model.IsActive = true;
                 var result = _mapper.Map<UserDto>(await _apiClient.PostAsync(path, model));
 
-                return RedirectToAction("Create", "CustomerRelationshipMgms", new { id = model.Email });
+                return RedirectToAction("Edit", new { id = model.Email });
 
             }
+
 
             return View();
         }
@@ -68,12 +72,14 @@ namespace Limdo.Web.App.Controllers
         public async Task<ActionResult> Details(string id)
         {
 
-            var path = string.Format("{0}/{1}",Registration_BaseUri, id) ;
+            var path = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(id).ToString()) ;
             var user = await _apiClient.GetAsync<UserDto>(path);
+            var appUserPath = string.Format("{0}/{1}", Base_GetAppUserUri, GuidEncoder.Decode(id).ToString());
+            var appUser = _mapper.Map<AppUserViewModel>(await _apiClient.GetAsync<AppUserDto>(appUserPath));
 
-            var newUser = new AppUserViewModel();
-            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
-            return View(newUser);
+            //var newUser = new AppUserViewModel();
+            //newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+            return View(appUser);
         }
 
 
@@ -104,8 +110,7 @@ namespace Limdo.Web.App.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             await PopulateViewBagsAsync();
-            //ViewBag.Genders = await GetGendersAsync();
-            //ViewBag.Countries = await GetCountriesAsync();
+
 
             var path = string.Format("{0}/{1}", Registration_UserUri, id);
             var user = await _apiClient.GetAsync<UserDto>(path);
@@ -121,10 +126,17 @@ namespace Limdo.Web.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(AppUserViewModel model)
         {
+
+            var userPath = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(model.UriKey));
+            var user = _mapper.Map<UserViewModel>(await _apiClient.GetAsync<UserDto>(userPath));
+
+
+
             try
             {
-                var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Registration_AppUserUri);
-                model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
+                var redirectUrlParam = model.UriKey;
+                var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Base_AppUserUri);
+                //model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
                 model.CreatedDate = DateTime.UtcNow;
                 model.ModifiedDate = DateTime.UtcNow;
                 model.GenderId = GuidEncoder.Decode(model.GenderId).ToString();
@@ -132,8 +144,9 @@ namespace Limdo.Web.App.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    model.User = user;
                     var result = await _apiClient.PostAsync(path, _mapper.Map<AppUserDto>(model));
-                    return RedirectToAction("Index", "CustomerRelationshipMgms");
+                    return RedirectToAction("Details", new {id = redirectUrlParam});
                 }
                 // TODO: Add update logic here
 

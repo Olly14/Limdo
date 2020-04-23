@@ -38,7 +38,7 @@ namespace Limdo.Web.App.Models
         //Navigation
         public virtual GenderDto Gender { get; set; }
 
-        public virtual UserDto User { get; set; }
+        public virtual UserViewModel User { get; set; }
 
 
         public virtual ICollection<string> Roles { get; set; }
