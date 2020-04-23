@@ -1,0 +1,11 @@
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\bin\Debug\netcoreapp3.1\Limdo.Domain.deps.json
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\bin\Debug\netcoreapp3.1\Limdo.Domain.runtimeconfig.json
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\bin\Debug\netcoreapp3.1\Limdo.Domain.runtimeconfig.dev.json
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\bin\Debug\netcoreapp3.1\Limdo.Domain.dll
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\bin\Debug\netcoreapp3.1\Limdo.Domain.pdb
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.AssemblyInfoInputs.cache
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.AssemblyInfo.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.dll
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.pdb
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.genruntimeconfig.cache
