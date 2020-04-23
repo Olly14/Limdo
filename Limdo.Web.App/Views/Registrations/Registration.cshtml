@@ -44,8 +44,8 @@
             <div class="form-group">
                 <label asp-for="ConfirmedPassword" class="control-label"></label>
                 <input asp-for="ConfirmedPassword" class="form-control ConfirmedPasswordInput" id="ConfirmedPasswordInputId" />
-
-                <p class="help-block hidden ConfirmedPasswordInputError customError " id="ConfirmedPasswordInputErrorId">'Confirmed Password' is required</p>
+                <p class="help-block hidden ConfirmedPasswordInputError customError" id="ConfirmedPasswordInputErrorId">'Confirmed Password' is required</p>
+                @*<p class="help-block hidden ConfirmedPasswordInputError customError " id="ConfirmedPasswordInputErrorId">'Confirmed Password' is required</p>*@
                 <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
             </div>
 

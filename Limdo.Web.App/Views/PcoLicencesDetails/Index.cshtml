@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Limdo.Web.App.Models.PcoLicenceDetailViewModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    foreach (var item in Model)
+    {
+        Html.Hidden("UriKey");
+    }
+}
+
+<h1>Pco Licences Details</h1>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PcoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExprireDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IssueDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PcoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExprireDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssueDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.UriKey}) |
+                    @Html.ActionLink("Details", "Details", new {id=item.UriKey}) |
+                    @Html.ActionLink("Delete", "Delete", new {id=item.UriKey})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

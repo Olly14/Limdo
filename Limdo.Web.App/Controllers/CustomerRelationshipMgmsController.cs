@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Limdo.Web.App.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CustomerRelationshipMgmsController : Controller
     {
         private const string BaseUri = "AppUsers";
@@ -34,7 +34,7 @@ namespace Limdo.Web.App.Controllers
         }
 
 
-
+        [HttpGet]
         // GET: CustomerRelationshipMgms
         public async Task<ActionResult> Index()
         {
@@ -43,6 +43,7 @@ namespace Limdo.Web.App.Controllers
             return View(users);
         }
 
+        [HttpGet]
         // GET: CustomerRelationshipMgms/Details/5
         public async Task<ActionResult> Details(string id)
         {
@@ -82,21 +83,30 @@ namespace Limdo.Web.App.Controllers
                 return View();
             }
         }
-
+        [HttpGet]
         // GET: CustomerRelationshipMgms/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+
+            var decodedId = GuidEncoder.Decode(id).ToString();
+
+            var path = string.Format("{0}/{1}", BaseUri, decodedId);
+            var user = await AppUserAsync(path);
+            return View(user);
         }
 
         // POST: CustomerRelationshipMgms/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(AppUserViewModel model)
         {
             try
             {
                 // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+
+                }
 
                 return RedirectToAction(nameof(Index));
             }
@@ -160,6 +170,27 @@ namespace Limdo.Web.App.Controllers
         private async Task<IEnumerable<AppUserViewModel>> AppUsersAsync(string appUserBaseUri)
         {
             return await _apiClient.ListAsync<AppUserViewModel>(appUserBaseUri);
+        }
+
+        private async Task<AppUserViewModel> PopulateCountryGenderIdsValuesAsync(AppUserViewModel appUser)
+        {
+            var countries = await GetCountriesAsync();
+            var genders = await GetGendersAsync();
+            appUser = await Task.Run(() => GetCountryIdValue(countries, appUser));
+            appUser = await Task.Run(() => GetGenderIdValue(genders, appUser));
+            return appUser;
+        }
+
+        private AppUserViewModel GetCountryIdValue(IEnumerable<CountryViewModel> genders, AppUserViewModel appUser)
+        {
+            appUser.CountryIdValue = genders.FirstOrDefault(g => g.CountryId == appUser.CountryId).CountryName;
+            return appUser;
+        }
+
+        private AppUserViewModel GetGenderIdValue(IEnumerable<GenderViewModel> genders, AppUserViewModel appUser)
+        {
+            appUser.GenderIdValue = genders.FirstOrDefault(g => g.GenderId == appUser.GenderId).Type;
+            return appUser;
         }
     }
 }

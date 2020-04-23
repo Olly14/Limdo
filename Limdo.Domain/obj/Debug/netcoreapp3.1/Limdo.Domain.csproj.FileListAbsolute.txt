@@ -20,3 +20,4 @@ C:\Users\ASUS\source\repos\Limdo\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Doma
 C:\Users\ASUS\source\repos\Limdo\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.dll
 C:\Users\ASUS\source\repos\Limdo\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.pdb
 C:\Users\ASUS\source\repos\Limdo\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.genruntimeconfig.cache
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Domain\obj\Debug\netcoreapp3.1\Limdo.Domain.csprojAssemblyReference.cache

@@ -296,3 +296,4 @@ C:\Users\ASUS\source\repos\Limdo\Limdo.Web.App\obj\Debug\netcoreapp3.1\staticweb
 C:\Users\ASUS\source\repos\Limdo\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.dll
 C:\Users\ASUS\source\repos\Limdo\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.pdb
 C:\Users\ASUS\source\repos\Limdo\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.genruntimeconfig.cache
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Edit.cshtml.g.cs

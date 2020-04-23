@@ -76,12 +76,32 @@ namespace Limdo.Web.App.Controllers
             var user = await _apiClient.GetAsync<UserDto>(path);
             var appUserPath = string.Format("{0}/{1}", Base_GetAppUserUri, GuidEncoder.Decode(id).ToString());
             var appUser = _mapper.Map<AppUserViewModel>(await _apiClient.GetAsync<AppUserDto>(appUserPath));
+            //appUser = await PopulateCountryGenderIdsValuesAsync(appUser);
 
-            //var newUser = new AppUserViewModel();
-            //newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+
             return View(appUser);
         }
 
+        private async Task<AppUserViewModel> PopulateCountryGenderIdsValuesAsync(AppUserViewModel appUser)
+        {
+            var countries = await GetCountriesAsync();
+            var genders = await GetGendersAsync();
+            appUser = await Task.Run(() => GetCountryIdValue(countries, appUser));
+            appUser = await Task.Run(() => GetGenderIdValue(genders, appUser));
+            return appUser;
+        }
+
+        private AppUserViewModel GetCountryIdValue(IEnumerable<CountryViewModel> genders, AppUserViewModel appUser)
+        {
+            appUser.CountryIdValue = genders.FirstOrDefault(g => g.CountryId == appUser.CountryId).CountryName;
+            return appUser;
+        }
+
+        private  AppUserViewModel GetGenderIdValue(IEnumerable<GenderViewModel> genders, AppUserViewModel appUser)
+        {
+            appUser.GenderIdValue = genders.FirstOrDefault(g => g.GenderId == appUser.GenderId).Type;
+            return appUser;
+        }
 
         [HttpGet]
         public async Task<ActionResult> Create(string id)
