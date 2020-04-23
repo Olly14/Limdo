@@ -18,7 +18,7 @@ namespace Limdo.Web.App.Controllers
     {
         private const string Registration_BaseUri = "Users";
         private const string Registration_EmailUri = "Users/GetUserBymail";
-        private const string User_AppUserUri = "Users/GetByUserId";
+        private const string User_ByUserIdUri = "Users/GetByUserId";
         private const string Registration_UserUri = "Users/GetUser";
 
         private const string Genders_Uri = "DropDownLists/GetGenders";
@@ -72,13 +72,13 @@ namespace Limdo.Web.App.Controllers
         public async Task<ActionResult> Details(string id)
         {
 
-            var path = string.Format("{0}/{1}", User_AppUserUri, GuidEncoder.Decode(id).ToString()) ;
+            var path = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(id).ToString()) ;
             var user = await _apiClient.GetAsync<UserDto>(path);
             var appUserPath = string.Format("{0}/{1}", Base_GetAppUserUri, GuidEncoder.Decode(id).ToString());
-            var appUser = await _apiClient.GetAsync<AppUserDto>(appUserPath);
+            var appUser = _mapper.Map<AppUserViewModel>(await _apiClient.GetAsync<AppUserDto>(appUserPath));
 
-            var newUser = new AppUserViewModel();
-            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+            //var newUser = new AppUserViewModel();
+            //newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
             return View(appUser);
         }
 
@@ -110,8 +110,7 @@ namespace Limdo.Web.App.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             await PopulateViewBagsAsync();
-            //ViewBag.Genders = await GetGendersAsync();
-            //ViewBag.Countries = await GetCountriesAsync();
+
 
             var path = string.Format("{0}/{1}", Registration_UserUri, id);
             var user = await _apiClient.GetAsync<UserDto>(path);
@@ -127,11 +126,17 @@ namespace Limdo.Web.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(AppUserViewModel model)
         {
+
+            var userPath = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(model.UriKey));
+            var user = _mapper.Map<UserViewModel>(await _apiClient.GetAsync<UserDto>(userPath));
+
+
+
             try
             {
                 var redirectUrlParam = model.UriKey;
-                var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, AppUsers_Post);
-                model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
+                var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Base_AppUserUri);
+                //model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
                 model.CreatedDate = DateTime.UtcNow;
                 model.ModifiedDate = DateTime.UtcNow;
                 model.GenderId = GuidEncoder.Decode(model.GenderId).ToString();
@@ -139,6 +144,7 @@ namespace Limdo.Web.App.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    model.User = user;
                     var result = await _apiClient.PostAsync(path, _mapper.Map<AppUserDto>(model));
                     return RedirectToAction("Details", new {id = redirectUrlParam});
                 }

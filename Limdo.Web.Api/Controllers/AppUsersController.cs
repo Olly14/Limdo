@@ -123,10 +123,20 @@ namespace Limdo.Web.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<AppUserDto>> PostAppUser(AppUserDto appUser)
         {
-            await _appUserRepository.AddAsync(_mapper.Map<AppUser>(appUser));
-            await _unitOfWorkAppUser.CommitAsync(_cancellationToken);
 
-            return CreatedAtAction("GetAppUser", new { id = appUser.AppUserId }, appUser);
+            try
+            {
+                await _appUserRepository.AddAsync(_mapper.Map<AppUser>(appUser));
+                await _unitOfWorkAppUser.CommitAsync(_cancellationToken);
+
+                return CreatedAtAction("GetAppUser", new { id = appUser.AppUserId }, appUser);
+            }
+            catch (Exception ex)
+            {
+                var eerorMsg = ex.Message;
+                throw;
+            }
+
         }
 
         // DELETE: api/AppUsers/5
