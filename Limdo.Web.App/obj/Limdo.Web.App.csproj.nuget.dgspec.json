@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Web.App\\Limdo.Web.App.csproj": {}
+    "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Web.App\\Limdo.Web.App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Data\\Limdo.Data.csproj": {
+    "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Data\\Limdo.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Data\\Limdo.Data.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Data\\Limdo.Data.csproj",
         "projectName": "Limdo.Data",
-        "projectPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Data\\Limdo.Data.csproj",
-        "packagesPath": "C:\\Users\\Olayinka.Ayoola\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Data\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Data\\Limdo.Data.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Olayinka.Ayoola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +32,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Domain\\Limdo.Domain.csproj": {
-                "projectPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Domain\\Limdo.Domain.csproj"
+              "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Domain\\Limdo.Domain.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Domain\\Limdo.Domain.csproj"
               }
             }
           }
@@ -77,21 +77,21 @@
         }
       }
     },
-    "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Domain\\Limdo.Domain.csproj": {
+    "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Domain\\Limdo.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Domain\\Limdo.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Domain\\Limdo.Domain.csproj",
         "projectName": "Limdo.Domain",
-        "projectPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Domain\\Limdo.Domain.csproj",
-        "packagesPath": "C:\\Users\\Olayinka.Ayoola\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Domain\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Domain\\Limdo.Domain.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Olayinka.Ayoola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -142,21 +142,21 @@
         }
       }
     },
-    "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Web.App\\Limdo.Web.App.csproj": {
+    "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Web.App\\Limdo.Web.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Web.App\\Limdo.Web.App.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Web.App\\Limdo.Web.App.csproj",
         "projectName": "Limdo.Web.App",
-        "projectPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Web.App\\Limdo.Web.App.csproj",
-        "packagesPath": "C:\\Users\\Olayinka.Ayoola\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Web.App\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Web.App\\Limdo.Web.App.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Web.App\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Olayinka.Ayoola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -170,8 +170,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Data\\Limdo.Data.csproj": {
-                "projectPath": "C:\\Users\\Olayinka.Ayoola\\source\\repos\\OllyProjectsSolution\\Limdo.Data\\Limdo.Data.csproj"
+              "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Data\\Limdo.Data.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\source\\repos\\Limdo\\Limdo.Data\\Limdo.Data.csproj"
               }
             }
           }
