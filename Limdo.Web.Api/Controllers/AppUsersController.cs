@@ -12,12 +12,15 @@ using Limdo.Web.Api.DtoModels;
 using Limdo.Domain;
 using Limdo.Data.Infrastructure.Repositories;
 using System.Threading;
+using Microsoft.AspNetCore.Components;
+//using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Limdo.Web.Api.Controllers
 {
-    [Route("api/[controller]")]
-    //[ApiController]
-    [Authorize]
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [ApiController]
+
+    //[Authorize]
     public class AppUsersController : ControllerBase
     {
         private readonly LimdoDbContext _context;
@@ -41,7 +44,11 @@ namespace Limdo.Web.Api.Controllers
         }
 
         // GET: api/AppUsers
+
+        //[HttpGet("GetAppUsers")]
         [HttpGet]
+        //[Route("GetAppUsers")]
+        //[Route("api/AppUsers/GetAppUsers")]
         public async Task<IEnumerable<AppUserDto>> GetAppUsers()
         {
             return _mapper.Map<IEnumerable<AppUserDto>>(await _appUserRepository.FindAllAsync());
@@ -59,6 +66,20 @@ namespace Limdo.Web.Api.Controllers
                 return NotFound();
             }
                                                                                                                    
+            return appUser;
+        }
+
+        [HttpGet("GetByAppUserId/{id}")]
+        //[Route("GetByAppUserId/{id}")]
+        public async Task<ActionResult<AppUserDto>> GetByAppUserId(string id)
+        {
+            //var appUser = await _context.AppUsers.FindAsync(id);
+            var appUser = _mapper.Map<AppUserDto>(await _appUserRepository.FindByAppUserIdAsync(id));
+            if (appUser == null)
+            {
+                return NotFound();
+            }
+
             return appUser;
         }
 
@@ -97,8 +118,9 @@ namespace Limdo.Web.Api.Controllers
         // POST: api/AppUsers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
+        //[HttpPost("AppUsers/PostAppUser")]
         //[Route("AppUsers/PostAppUser")]
+        [HttpPost]
         public async Task<ActionResult<AppUserDto>> PostAppUser(AppUserDto appUser)
         {
             await _appUserRepository.AddAsync(_mapper.Map<AppUser>(appUser));

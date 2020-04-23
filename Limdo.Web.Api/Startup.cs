@@ -35,16 +35,16 @@ namespace Limdo.Web.Api
             services.AddControllers();
 
 
-            //services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            //.AddIdentityServerAuthentication(options =>
-            //{
-            //    // base-address of your identityserver
-            //    options.Authority = "https://localhost:44314/";
-            //    options.RequireHttpsMetadata = true;
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            .AddIdentityServerAuthentication(options =>
+            {
+                // base-address of your identityserver
+                options.Authority = "https://localhost:44314/";
+                options.RequireHttpsMetadata = true;
 
-            //    // name of the API resource
-            //    options.ApiName = "Limdo.Web.Api";
-            //});
+                // name of the API resource
+                options.ApiName = "Limdo.Web.Api";
+            });
 
 
             services.AddDbContextPool<LimdoDbContext>(options => 
@@ -92,7 +92,7 @@ namespace Limdo.Web.Api
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
