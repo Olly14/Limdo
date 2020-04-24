@@ -55,6 +55,8 @@ namespace Limdo.Web.App.Models
 
         public virtual UserViewModel User { get; set; }
 
+        public virtual PcoLicenceDetailViewModel PcoLicenceDetail { get; set; }
+
 
         public virtual ICollection<string> Roles { get; set; }
         public virtual ICollection<string> Claims { get; set; }

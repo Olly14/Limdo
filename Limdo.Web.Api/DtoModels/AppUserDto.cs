@@ -41,6 +41,8 @@ namespace Limdo.Web.Api.DtoModels
         //Navigation
         public virtual Gender Gender { get; set; }
 
+        public virtual PcoLicenceDetailDto PcoLicenceDetail { get; set; }
+
         public virtual User User { get; set; }
 
         [NotMapped]

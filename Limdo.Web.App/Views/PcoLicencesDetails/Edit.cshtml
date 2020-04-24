@@ -1,0 +1,58 @@
+﻿@model Limdo.Web.App.Models.PcoLicenceDetailViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Pco Licence Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            @Html.Hidden("UriKey")
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PcoId" class="control-label"></label>
+                <input asp-for="PcoId" class="form-control" />
+                <span asp-validation-for="PcoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExprireDate" class="control-label"></label>
+                <input asp-for="ExprireDate" class="form-control" />
+                <span asp-validation-for="ExprireDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueDate" class="control-label"></label>
+                <input asp-for="IssueDate" class="form-control" />
+                <span asp-validation-for="IssueDate" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="AppUserId" class="control-label"></label>
+                <input asp-for="AppUserId" class="form-control" />
+                <span asp-validation-for="AppUserId" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="UriKey" class="control-label"></label>
+                <input asp-for="UriKey" class="form-control" />
+                <span asp-validation-for="UriKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppUserUriKey" class="control-label"></label>
+                <input asp-for="AppUserUriKey" class="form-control" />
+                <span asp-validation-for="AppUserUriKey" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -18,8 +18,8 @@ namespace Limdo.Web.App.Controllers
     {
         private const string BaseUri = "AppUsers";
         private const string UsersBaseUri = "Users";
-        private const string BaseUriCountry = "Countries";
-        private const string BaseUriGender = "Genders";
+        private const string BaseUriCountry = "DropDownLists/GetCountries";
+        private const string BaseUriGender = "DropDownLists/GetGenders";
 
 
         private readonly IApiClient _apiClient;
@@ -40,6 +40,7 @@ namespace Limdo.Web.App.Controllers
         {
             var users = await AppUsersAsync(BaseUri);
             users = PopulateUriKey(users);
+            users = await PopulateCountryGenderIdsValuesOfUsersAsync(users.ToList());
             return View(users);
         }
 
@@ -172,6 +173,25 @@ namespace Limdo.Web.App.Controllers
             return await _apiClient.ListAsync<AppUserViewModel>(appUserBaseUri);
         }
 
+        private async Task<IEnumerable<AppUserViewModel>> PopulateCountryGenderIdsValuesOfUsersAsync(List<AppUserViewModel> appUsers)
+        {
+            var countries = await GetCountriesAsync();
+            var genders = await GetGendersAsync();
+            return await Task.Run(() => appUsers.Select(au =>
+             {
+
+                 au = GetCountryIdValue(countries, au);
+                 au = GetGenderIdValue(genders, au);
+                 return au;
+             }));
+
+            //var countries = await GetCountriesAsync();
+            //var genders = await GetGendersAsync();
+            //appUser = await Task.Run(() => GetCountryIdValue(countries, appUser));
+            //appUser = await Task.Run(() => GetGenderIdValue(genders, appUser));
+            //return appUser;
+        }
+
         private async Task<AppUserViewModel> PopulateCountryGenderIdsValuesAsync(AppUserViewModel appUser)
         {
             var countries = await GetCountriesAsync();
@@ -183,13 +203,13 @@ namespace Limdo.Web.App.Controllers
 
         private AppUserViewModel GetCountryIdValue(IEnumerable<CountryViewModel> genders, AppUserViewModel appUser)
         {
-            appUser.CountryIdValue = genders.FirstOrDefault(g => g.CountryId == appUser.CountryId).CountryName;
+            appUser.CountryIdValue = genders.FirstOrDefault(g => string.Compare(g.CountryId, appUser.CountryId, true) == 0).CountryName;
             return appUser;
         }
 
         private AppUserViewModel GetGenderIdValue(IEnumerable<GenderViewModel> genders, AppUserViewModel appUser)
         {
-            appUser.GenderIdValue = genders.FirstOrDefault(g => g.GenderId == appUser.GenderId).Type;
+            appUser.GenderIdValue = genders.FirstOrDefault(g => string.Compare(g.GenderId, appUser.GenderId, true) == 0).Type;
             return appUser;
         }
     }

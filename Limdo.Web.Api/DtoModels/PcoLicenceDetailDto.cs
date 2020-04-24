@@ -12,5 +12,9 @@ namespace Limdo.Web.Api.DtoModels
         public string ExprireDate { get; set; }
 
         public string IssueDate { get; set; }
+
+        public string AppUserId { get; set; }
+
+        public AppUserDto AppUser { get; set; }
     }
 }

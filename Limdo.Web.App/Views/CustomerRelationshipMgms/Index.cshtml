@@ -60,11 +60,12 @@
                 @Html.DisplayNameFor(model => model.IsBlocked)
             </th>
             @*<th>
-                    @Html.DisplayNameFor(model => model.ModifierAppUserId)
-                </th>*@
+            @Html.DisplayNameFor(model => model.ModifierAppUserId)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ModifiedDate)
             </th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -73,64 +74,64 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstLineOfAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SecondLineOfAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Town)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Postcode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CountryId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GenderId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsDeleted)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsBlocked)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifierAppUserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.UriKey" class="btn btn-primary">Edit</a>
-                    @*@Html.ActionLink("Edit", "Edit", new { id = item.UriKey }, new { @class = "btm btn-primary" })*@
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.UriKey" class="btn btn-primary">Details</a>
-                    @*@Html.ActionLink("Details", "Details", new {id=item.UriKey}, new { @class = "btm btn-primary" })*@
-                </td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@item.UriKey" class="btn btn-primary">Delete</a>
-                    @*@Html.ActionLink("Delete", "Delete", new {id=item.UriKey}, new { @class = "btm btn-primary" })*@
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstLineOfAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondLineOfAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryIdValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenderIdValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBlocked)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ModifierAppUserId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UriKey" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.UriKey" class="btn btn-primary">Details</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.UriKey" class="btn btn-primary">Delete</a>
+            </td>
+            <td>
+                <a asp-controller="PcoLicencesDetails" asp-action="Create" asp-route-id="@item.UriKey" class="btn btn-primary">Add Pco Details</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

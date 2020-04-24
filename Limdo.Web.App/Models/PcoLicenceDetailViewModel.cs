@@ -17,6 +17,14 @@ namespace Limdo.Web.App.Models
         [Display(Name = "Issue Date")]
         public string IssueDate { get; set; }
 
+        public AppUserViewModel AppUser { get; set; }
+
+        public string AppUserId { get; set; }
+
         public string UriKey { get; set; }
+
+        public string AppUserUriKey { get; set; }
+
+
     }
 }

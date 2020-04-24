@@ -76,7 +76,7 @@ namespace Limdo.Web.App.Controllers
             var user = await _apiClient.GetAsync<UserDto>(path);
             var appUserPath = string.Format("{0}/{1}", Base_GetAppUserUri, GuidEncoder.Decode(id).ToString());
             var appUser = _mapper.Map<AppUserViewModel>(await _apiClient.GetAsync<AppUserDto>(appUserPath));
-            //appUser = await PopulateCountryGenderIdsValuesAsync(appUser);
+            appUser = await PopulateCountryGenderIdsValuesAsync(appUser);
 
 
             return View(appUser);
@@ -93,13 +93,13 @@ namespace Limdo.Web.App.Controllers
 
         private AppUserViewModel GetCountryIdValue(IEnumerable<CountryViewModel> genders, AppUserViewModel appUser)
         {
-            appUser.CountryIdValue = genders.FirstOrDefault(g => g.CountryId == appUser.CountryId).CountryName;
+            appUser.CountryIdValue = genders.FirstOrDefault(g => string.Compare(g.CountryId, appUser.CountryId, true) == 0).CountryName;
             return appUser;
         }
 
         private  AppUserViewModel GetGenderIdValue(IEnumerable<GenderViewModel> genders, AppUserViewModel appUser)
         {
-            appUser.GenderIdValue = genders.FirstOrDefault(g => g.GenderId == appUser.GenderId).Type;
+            appUser.GenderIdValue = genders.FirstOrDefault(g =>  string.Compare(g.GenderId, appUser.GenderId, true) == 0 ).Type;
             return appUser;
         }
 

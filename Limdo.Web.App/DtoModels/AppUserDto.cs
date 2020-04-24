@@ -42,6 +42,8 @@ namespace Limdo.Web.App.DtoModels
 
         public virtual UserDto User { get; set; }
 
+        public virtual PcoLicenceDetailDto PcoLicenceDetail { get; set; }
+
 
         public virtual ICollection<string> Roles { get; set; }
 

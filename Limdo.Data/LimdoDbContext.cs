@@ -31,11 +31,11 @@ namespace Limdo.Data
 
 
             modelBuilder.Entity<AppUser>()
-                .HasOne<Gender>(a => a.Gender)
-                .WithMany(c => c.AppUsers)
-                .HasForeignKey(a => a.GenderId).IsRequired();
+                .HasOne<PcoLicenceDetail>(au => au.PcoLicenceDetail)
+                .WithOne(pld => pld.AppUser)
+                .HasForeignKey<PcoLicenceDetail>(a => a.AppUserId).IsRequired();
 
-            //modelBuilder.Entity<Account>()
+            //modelBuilder.Entity<AppUser>()
             //    .HasOne<AccountType>(a => a.AccountType)
             //    .WithMany(acctType => acctType.Accounts)
             //    .HasForeignKey(a => a.AccountTypeId).IsRequired();

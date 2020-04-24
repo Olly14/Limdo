@@ -14,5 +14,9 @@ namespace Limdo.Domain
         public string ExprireDate { get; set; }
 
         public string IssueDate { get; set; }
+
+        public string AppUserId { get; set; }
+
+        public AppUser AppUser { get; set; }
     }
 }
