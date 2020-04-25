@@ -30,10 +30,16 @@ namespace Limdo.Data
                 .HasForeignKey(a => a.CountryId);
 
 
+            //modelBuilder.Entity<AppUser>()
+            //    .HasRequired(au => au.PcoLicenceDetail)
+            //    .WithRequiredPrincipal(pld => pld.AppUser);
+
+
+
             modelBuilder.Entity<AppUser>()
                 .HasOne<PcoLicenceDetail>(au => au.PcoLicenceDetail)
                 .WithOne(pld => pld.AppUser)
-                .HasForeignKey<PcoLicenceDetail>(a => a.AppUserId).IsRequired();
+             .HasForeignKey<PcoLicenceDetail>(a => a.AppUserId);
 
             //modelBuilder.Entity<PcoLicenceDetail>()
             //    .HasOne<AppUser>(au => au.AppUser);

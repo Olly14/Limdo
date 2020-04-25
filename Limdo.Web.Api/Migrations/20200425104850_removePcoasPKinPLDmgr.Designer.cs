@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Limdo.Web.Api.Migrations
 {
     [DbContext(typeof(LimdoDbContext))]
-    [Migration("20200424085921_pcoliDetailAndAppUsermodifiedMgr")]
-    partial class pcoliDetailAndAppUsermodifiedMgr
+    [Migration("20200425104850_removePcoasPKinPLDmgr")]
+    partial class removePcoasPKinPLDmgr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,12 +118,7 @@ namespace Limdo.Web.Api.Migrations
 
             modelBuilder.Entity("Limdo.Domain.PcoLicenceDetail", b =>
                 {
-                    b.Property<string>("PcoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("AppUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ExprireDate")
@@ -132,10 +127,10 @@ namespace Limdo.Web.Api.Migrations
                     b.Property<string>("IssueDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PcoId");
+                    b.Property<string>("PcoLicenceId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
+                    b.HasKey("AppUserId");
 
                     b.ToTable("PcoDetails");
                 });

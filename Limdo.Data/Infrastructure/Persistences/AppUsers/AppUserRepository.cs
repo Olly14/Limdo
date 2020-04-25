@@ -23,7 +23,7 @@ namespace Limdo.Data.Infrastructure.Persistences.AppUSerRepository
         public async Task<AppUser> FindByAppUserIdAsync(string id)
         {
             return await Task.Run(() =>  LimdoDbContext.AppUsers
-                                    .FirstOrDefault(au => au.SubjectId == id));
+                                    .FirstOrDefault(au => au.AppUserId == id));
         }
 
         public bool isAdmin(Guid adminIdAsGuid, string ownerId)

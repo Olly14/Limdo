@@ -75,7 +75,7 @@ namespace Limdo.Web.Api.Controllers
         [HttpPut("PutPcoLicenceDetail/{id}")]
         public async Task<IActionResult> PutPcoLicenceDetail(string id, PcoLicenceDetail pcoLicenceDetail)
         {
-            if (id != pcoLicenceDetail.PcoId)
+            if (id != pcoLicenceDetail.AppUserId)
             {
                 return BadRequest();
             }
@@ -113,7 +113,7 @@ namespace Limdo.Web.Api.Controllers
                 _context.PcoDetails.Add(pcoLicenceDetail);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetPcoLicenceDetail", new { id = pcoLicenceDetail.PcoId }, pcoLicenceDetail);
+                return CreatedAtAction("GetPcoLicenceDetail", new { id = pcoLicenceDetail.AppUserId }, pcoLicenceDetail);
             }
             catch (System.Exception ex)
             {
@@ -141,7 +141,7 @@ namespace Limdo.Web.Api.Controllers
 
         private bool PcoLicenceDetailExists(string id)
         {
-            return _context.PcoDetails.Any(e => e.PcoId == id);
+            return _context.PcoDetails.Any(e => e.AppUserId == id);
         }
     }
 }

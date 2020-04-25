@@ -1,33 +1,21 @@
 ﻿@model Limdo.Web.App.Models.AppUserViewModel
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
-<h4>AppUserViewModel</h4>
+<h4>New Registration Details for App User </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             @Html.Hidden("UriKey")
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AppUserId" class="control-label"></label>
-                <input asp-for="AppUserId" class="form-control" />
-                <span asp-validation-for="AppUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UriKey" class="control-label"></label>
-                <input asp-for="UriKey" class="form-control" />
-                <span asp-validation-for="UriKey" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubjectId" class="control-label"></label>
-                <input asp-for="SubjectId" class="form-control" />
-                <span asp-validation-for="SubjectId" class="text-danger"></span>
-            </div>
+
+
+
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -38,11 +26,7 @@
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="FirstLineOfAddress" class="control-label"></label>
                 <input asp-for="FirstLineOfAddress" class="form-control" />
@@ -68,49 +52,28 @@
                 <input asp-for="DateOfBirth" class="form-control" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="CountryId" class="control-label"></label>
-                <input asp-for="CountryId" class="form-control" />
+                @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Countries, "UriKey", "CountryName"), "--Select Country--", new { })
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GenderId" class="control-label"></label>
-                <input asp-for="GenderId" class="form-control" />
+
+                @Html.DropDownListFor(m => m.GenderId, new SelectList(ViewBag.Genders, "UriKey", "Type"), "--Select Gender--", new { })
                 <span asp-validation-for="GenderId" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsBlocked" /> @Html.DisplayNameFor(model => model.IsBlocked)
-                </label>
-            </div>
+
+
             <div class="form-group">
-                <label asp-for="ModifierAppUserId" class="control-label"></label>
-                <input asp-for="ModifierAppUserId" class="form-control" />
-                <span asp-validation-for="ModifierAppUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedDate" class="control-label"></label>
-                <input asp-for="ModifiedDate" class="form-control" />
-                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="CustomerRelationshipMgs" asp-action="Index">Back to List</a>
 </div>
 

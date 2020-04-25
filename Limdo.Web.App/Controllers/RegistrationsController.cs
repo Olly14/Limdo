@@ -60,7 +60,7 @@ namespace Limdo.Web.App.Controllers
                 model.IsActive = true;
                 var result = _mapper.Map<UserDto>(await _apiClient.PostAsync(path, model));
 
-                return RedirectToAction("Edit", new { id = model.Email });
+                return RedirectToAction("WelcomeNewUser", "CustomerRelationshipMgms", new { emailId = model.Email });
 
             }
 
@@ -74,7 +74,7 @@ namespace Limdo.Web.App.Controllers
         public async Task<ActionResult> Details(string id)
         {
 
-            var path = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(id).ToString()) ;
+            var path = string.Format("{0}/{1}", Registration_EmailUri, GuidEncoder.Decode(id).ToString()) ;
             var user = await _apiClient.GetAsync<UserDto>(path);
             var appUserPath = string.Format("{0}/{1}", Base_GetAppUserUri, GuidEncoder.Decode(id).ToString());
             var appUser = _mapper.Map<AppUserViewModel>(await _apiClient.GetAsync<AppUserDto>(appUserPath));
@@ -139,7 +139,7 @@ namespace Limdo.Web.App.Controllers
             try
             {
                 var redirectUrlParam = model.UriKey;
-                var path = string.Format("{0}", AppUsers_Put);
+                var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Base_AppUserUri);
                 //model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
                 model.CreatedDate = DateTime.UtcNow;
                 model.ModifiedDate = DateTime.UtcNow;
@@ -149,8 +149,8 @@ namespace Limdo.Web.App.Controllers
                 if (ModelState.IsValid)
                 {
                     model.User = user;
-                    await _apiClient.PutAsync(path, _mapper.Map<AppUserDto>(model));
-                    return RedirectToAction("Details", new {id = redirectUrlParam});
+                    await _apiClient.PostAsync(path, _mapper.Map<AppUserDto>(model));
+                    return RedirectToAction("Details", new {emailId = redirectUrlParam});
                 }
                 // TODO: Add update logic here
 

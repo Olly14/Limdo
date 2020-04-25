@@ -99,21 +99,25 @@ namespace Limdo.Web.App.Controllers
                 if (ModelState.IsValid)
                 {
                     var decodedId = GuidEncoder.Decode(model.AppUserUriKey).ToString();
-                    var path = string.Format("{0}/{1}", Pdl_ByAppUserId, decodedId);
+                    var path = string.Format("{0}/{1}", BaseUri_AppUserById, decodedId);
                     var appUser = _mapper.Map<AppUserViewModel>(await _apiClient.GetAsync<AppUserDto>(path));
 
-                    
-                    var updateAppUserPath = string.Format("{0}/{1}", BaseUri_AppUser, appUser.AppUserId);
-                    model.AppUserId = string.Empty;
-                    appUser.PcoLicenceDetail = model;
-                    await _apiClient.PutAsync<AppUserDto>(updateAppUserPath, _mapper.Map<AppUserDto>(appUser));
-                    //var updateAppUserPath = string.Format("{0}",BaseUri_AppUser);
+
+                    //var updateAppUserPath = string.Format("{0}", BaseUri_AppUser);
                     //model.AppUserId = string.Empty;
+                    //model.AppUserId = appUser.AppUserId;
+                    //appUser.PcoLicenceDetail = model;
+                    //await _apiClient.PutAsync<AppUserDto>(updateAppUserPath, _mapper.Map<AppUserDto>(appUser));
+
+
+
+                    //var createPath = string.Format("{0}",Pdl_PostPdl);
+                    //model.AppUserId = appUser.AppUserId;
                     //await _apiClient.PostAsync<PcoLicenceDetailDto>(createPath, _mapper.Map<PcoLicenceDetailDto>(model));
-                    //var createPath = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Pdl_PostPdl);
+                    var createPath = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Pdl_PostPdl);
                     //model.AppUser = appUser;
-                    //model.AppUserId = string.Empty;
-                    //await _apiClient.PostAsync<PcoLicenceDetailDto>(createPath, _mapper.Map<PcoLicenceDetailDto>(model));
+                    model.AppUserId = appUser.AppUserId;
+                    await _apiClient.PostAsync<PcoLicenceDetailDto>(createPath, _mapper.Map<PcoLicenceDetailDto>(model));
                     return RedirectToAction(nameof(Index));
                 }
                 // TODO: Add insert logic here
@@ -133,7 +137,7 @@ namespace Limdo.Web.App.Controllers
             var decodedId = GuidEncoder.Decode(id).ToString();
             var path = string.Format("{0}/{1}", BaseUri, decodedId);
             var pdl = _mapper.Map<PcoLicenceDetailViewModel>(await _apiClient.GetAsync<PcoLicenceDetailDto>(path));
-            pdl.UriKey = GuidEncoder.Encode(pdl.PcoId);
+            pdl.UriKey = GuidEncoder.Encode(pdl.AppUserId);
             return View(pdl);
         }
 
@@ -189,7 +193,7 @@ namespace Limdo.Web.App.Controllers
                 
                 pcoLicenceDetails.Select(pld => 
                 {
-                    pld.UriKey = GuidEncoder.Encode(pld.PcoId); return pld; 
+                    pld.UriKey = GuidEncoder.Encode(pld.AppUserId); return pld; 
                 })
             );
         }

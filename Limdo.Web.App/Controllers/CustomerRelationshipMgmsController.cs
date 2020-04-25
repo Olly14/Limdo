@@ -7,6 +7,7 @@ using Limdo.Web.App.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,8 +19,14 @@ namespace Limdo.Web.App.Controllers
     {
         private const string BaseUri = "AppUsers";
         private const string UsersBaseUri = "Users";
+        private const string User_ByUserIdUri = "Users/GetByUserId";
         private const string BaseUriCountry = "DropDownLists/GetCountries";
         private const string BaseUriGender = "DropDownLists/GetGenders";
+
+        private const string AppUsers_Put = "AppUsers/PutAppUser";
+
+
+
 
 
         private readonly IApiClient _apiClient;
@@ -44,6 +51,15 @@ namespace Limdo.Web.App.Controllers
             return View(users);
         }
 
+        public async Task<ActionResult> WelcomeNewUser(string emailId)
+        {
+            var path = string.Format("{0}/{1}", UsersBaseUri, emailId);
+            var user = _mapper.Map<UserViewModel>(await _apiClient.GetAsync<UserDto>(path));
+
+            return View(user);
+        }
+
+
         [HttpGet]
         // GET: CustomerRelationshipMgms/Details/5
         public async Task<ActionResult> Details(string id)
@@ -59,30 +75,51 @@ namespace Limdo.Web.App.Controllers
         
         [HttpGet]
         // GET: CustomerRelationshipMgms/Create
-        public async Task<ActionResult> Create(string id)
+        public async Task<ActionResult> Create(string emailId)
         {
-           //var decodedId = GuidEncoder.Decode(id).ToString();
-            var path = string.Format("{0}{1}/{2}", HttpClientProvider.HttpClient.BaseAddress, UsersBaseUri, id);
+            await PopulateViewBagsAsync();
+            var path = string.Format("{0}/{1}", UsersBaseUri, emailId);
             var user = await _apiClient.GetAsync<UserDto>(path);
-            
+
             var newUser = new AppUserViewModel();
             newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+            newUser.DisplayName = emailId;
             return View(newUser);
         }
 
         // POST: CustomerRelationshipMgms/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AppUserViewModel model)
+        public async Task<ActionResult> Create(AppUserViewModel model)
         {
+            var userPath = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(model.UriKey));
+            var user = _mapper.Map<UserViewModel>(await _apiClient.GetAsync<UserDto>(userPath));
+
+
+            var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, BaseUri);
+            //model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
+            model.CreatedDate = DateTime.UtcNow;
+            model.ModifiedDate = DateTime.UtcNow;
+
+            model.GenderId = GuidEncoder.Decode(model.GenderId).ToString();
+            model.CountryId = GuidEncoder.Decode(model.CountryId).ToString();
+
             try
             {
                 // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    model.User = user;
+                    await _apiClient.PostAsync(path, _mapper.Map<AppUserDto>(model));
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
+
             }
-            catch
+            catch (Exception ex)
             {
+                var msgError = ex.Message;
                 return View();
             }
         }
@@ -95,24 +132,30 @@ namespace Limdo.Web.App.Controllers
 
             var path = string.Format("{0}/{1}", BaseUri, decodedId);
             var user = await AppUserAsync(path);
-            
+            user.UriKey = GuidEncoder.Encode(user.AppUserId);
+            user.SubjectId = GuidEncoder.Encode(user.SubjectId);
             return View(user);
         }
 
         // POST: CustomerRelationshipMgms/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AppUserViewModel model)
+        public async Task<ActionResult> Edit(AppUserViewModel model)
         {
+            model.AppUserId = GuidEncoder.Decode(model.UriKey).ToString();
+            model.SubjectId = GuidEncoder.Decode(model.SubjectId).ToString();
+
             try
             {
+                var path = string.Format("{0}", BaseUri);
                 // TODO: Add update logic here
                 if (ModelState.IsValid)
                 {
-
+                    await _apiClient.PutAsync(path, _mapper.Map<AppUserDto>(model));
+                    return RedirectToAction(nameof(Index));
                 }
 
-                return RedirectToAction(nameof(Index));
+                return View();
             }
             catch
             {
@@ -214,6 +257,32 @@ namespace Limdo.Web.App.Controllers
         {
             appUser.GenderIdValue = genders.FirstOrDefault(g => string.Compare(g.GenderId, appUser.GenderId, true) == 0).Type;
             return appUser;
+        }
+
+        public async Task PopulateViewBagsAsync()
+        {
+            var genders = await GetGendersAsync();
+            var countries = await GetCountriesAsync();
+            genders = await PopulateGenderUriKeyAsync(genders.ToList());
+            countries = await PopulateCountryUriKeyAsync(countries.ToList());
+            ViewBag.Genders = genders;
+            ViewBag.Countries = countries;
+        }
+
+        public async Task<IEnumerable<GenderViewModel>> PopulateGenderUriKeyAsync(List<GenderViewModel> genders)
+        {
+            return await Task.Run(() =>
+
+                genders.Select(g => { g.UriKey = GuidEncoder.Encode(g.GenderId); return g; })
+            );
+        }
+
+        public async Task<IEnumerable<CountryViewModel>> PopulateCountryUriKeyAsync(List<CountryViewModel> countries)
+        {
+            return await Task.Run(() =>
+
+                countries.Select(g => { g.UriKey = GuidEncoder.Encode(g.CountryId); return g; })
+            );
         }
     }
 }

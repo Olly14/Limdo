@@ -1,0 +1,18 @@
+﻿@model Limdo.Web.App.Models.UserViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "WelcomeNewUser";
+}
+
+<h1>Welcome New User</h1>
+
+<div class="container">
+    <div class="row">
+        <h4>
+            Congratulations, Looks like you're new authorized to view this page
+            Would you prefer to <a asp-action="Create" asp-route-emailId="@Model.Email">Provide Your full details</a>
+        </h4>
+    </div>
+</div>

@@ -63,7 +63,7 @@ namespace Limdo.Web.Api.Controllers
             {
                 return NotFound();
             }
-                                                                                                                   
+
             return appUser;
         }
 
@@ -84,31 +84,51 @@ namespace Limdo.Web.Api.Controllers
         // PUT: api/AppUsers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("PutAppUser")]
+        [HttpPut]
         public async Task<IActionResult> PutAppUser(AppUserDto appUser)
         {
             //if (id != appUser.AppUserId)
             //{
             //    return BadRequest();
             //}
-
-            _context.Entry(appUser).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    await _unitOfWorkAppUser.UpdateAsync(_cancellationToken,
+                        _mapper.Map<AppUser>(appUser));
+                    return Ok();
+                    //return CreatedAtAction("GetAppUser", new { id = appUser.AppUserId }, appUser);
+                }
+                else
+                {
+                    return NotFound();
+                }
+                
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                //if (!AppUserExists(id))
-                //{
-                //    return NotFound();
-                //}
-                //else
-                //{
-                //    throw;
-                //}
+                var errMsg = ex.Message;
+                throw;
             }
+
+            //_context.Entry(appUser).State = EntityState.Modified;
+
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    //if (!AppUserExists(id))
+            //    //{
+            //    //    return NotFound();
+            //    //}
+            //    //else
+            //    //{
+            //    //    throw;
+            //    //}
+            //}
 
             return NoContent();
         }

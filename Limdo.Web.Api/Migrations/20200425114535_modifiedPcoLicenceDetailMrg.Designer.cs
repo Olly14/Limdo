@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Limdo.Web.Api.Migrations
 {
     [DbContext(typeof(LimdoDbContext))]
-    [Migration("20200424192335_notMappedAppUserPdlMgr")]
-    partial class notMappedAppUserPdlMgr
+    [Migration("20200425114535_modifiedPcoLicenceDetailMrg")]
+    partial class modifiedPcoLicenceDetailMrg
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,10 +118,6 @@ namespace Limdo.Web.Api.Migrations
 
             modelBuilder.Entity("Limdo.Domain.PcoLicenceDetail", b =>
                 {
-                    b.Property<string>("PcoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -131,12 +127,10 @@ namespace Limdo.Web.Api.Migrations
                     b.Property<string>("IssueDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PcoLicenceId")
+                    b.Property<string>("PcoLicenceNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PcoId");
-
-                    b.HasIndex("AppUserId");
+                    b.HasKey("AppUserId");
 
                     b.ToTable("PcoDetails");
                 });
@@ -255,8 +249,10 @@ namespace Limdo.Web.Api.Migrations
             modelBuilder.Entity("Limdo.Domain.PcoLicenceDetail", b =>
                 {
                     b.HasOne("Limdo.Domain.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
+                        .WithOne("PcoLicenceDetail")
+                        .HasForeignKey("Limdo.Domain.PcoLicenceDetail", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Limdo.Domain.UserClaim", b =>

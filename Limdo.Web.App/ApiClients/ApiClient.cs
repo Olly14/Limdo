@@ -75,7 +75,7 @@ namespace Limdo.Web.App.ApiClients
         {
             var message =
                 new HttpRequestMessage(HttpMethod.Get, $"{ _httpClient.BaseAddress}{uri}");
-            //message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
+            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
 
 
             try
@@ -128,7 +128,7 @@ namespace Limdo.Web.App.ApiClients
                     Content = new StringContent(JsonConvert.SerializeObject(newItem), Encoding.UTF8,
                         "application/json")
                 };
-            //message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
+            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
 
             var response = await _httpClient.SendAsync(message);
 
@@ -174,7 +174,7 @@ namespace Limdo.Web.App.ApiClients
                     Content = new StringContent(JsonConvert.SerializeObject(updatedItem), Encoding.UTF8,
                         "application/json")
                 };
-            //message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
+            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
 
 
 

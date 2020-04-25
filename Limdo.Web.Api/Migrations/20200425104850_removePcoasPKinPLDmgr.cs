@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Limdo.Web.Api.Migrations
 {
-    public partial class firstLimdoMgr : Migration
+    public partial class removePcoasPKinPLDmgr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,19 +46,6 @@ namespace Limdo.Web.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Genders", x => x.GenderId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PcoDetails",
-                columns: table => new
-                {
-                    PcoId = table.Column<string>(nullable: false),
-                    ExprireDate = table.Column<string>(nullable: true),
-                    IssueDate = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PcoDetails", x => x.PcoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,7 +105,7 @@ namespace Limdo.Web.Api.Migrations
                     DateOfBirth = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     CountryId = table.Column<string>(nullable: true),
-                    GenderId = table.Column<string>(nullable: false),
+                    GenderId = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     IsBlocked = table.Column<bool>(nullable: false),
                     ModifierAppUserId = table.Column<string>(nullable: true),
@@ -138,12 +125,32 @@ namespace Limdo.Web.Api.Migrations
                         column: x => x.GenderId,
                         principalTable: "Genders",
                         principalColumn: "GenderId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AppUsers_dbo_Users_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "dbo_Users",
                         principalColumn: "SubjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PcoDetails",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(nullable: false),
+                    PcoLicenceId = table.Column<string>(nullable: true),
+                    ExprireDate = table.Column<string>(nullable: true),
+                    IssueDate = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PcoDetails", x => x.AppUserId);
+                    table.ForeignKey(
+                        name: "FK_PcoDetails_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "AppUserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -177,9 +184,6 @@ namespace Limdo.Web.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AppUsers");
-
-            migrationBuilder.DropTable(
                 name: "dbo_UserClaims");
 
             migrationBuilder.DropTable(
@@ -187,6 +191,9 @@ namespace Limdo.Web.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "PcoDetails");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "Countries");

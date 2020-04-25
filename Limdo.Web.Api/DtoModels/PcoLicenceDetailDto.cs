@@ -7,10 +7,7 @@ namespace Limdo.Web.Api.DtoModels
 {
     public class PcoLicenceDetailDto
     {
-        public string PcoId { get; set; }
-
-        public string PcoLicenceId { get; set; }
-
+        public string PcoLicenceNumber { get; set; }
         public string ExprireDate { get; set; }
 
         public string IssueDate { get; set; }
