@@ -21,7 +21,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PcoId)
+                @Html.DisplayNameFor(model => model.PcoLicenceId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ExprireDate)
@@ -30,27 +30,33 @@
                 @Html.DisplayNameFor(model => model.IssueDate)
             </th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PcoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExprireDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IssueDate)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.UriKey}) |
-                    @Html.ActionLink("Details", "Details", new {id=item.UriKey}) |
-                    @Html.ActionLink("Delete", "Delete", new {id=item.UriKey})
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PcoLicenceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExprireDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssueDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UriKey" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.UriKey" class="btn btn-primary">Details</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.UriKey" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

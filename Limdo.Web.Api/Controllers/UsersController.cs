@@ -43,9 +43,9 @@ namespace Limdo.Web.Api.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet]
-        //[HttpGet("{id}")]
-        [Route("GetUser/{id}")]
+        //[HttpGet]
+        [HttpGet("{id}")]
+        //[Route("GetUser/{id}")]
         public async Task<ActionResult<UserDto>> GetUser(string id)
         {
             var user = _mapper.Map<UserDto>(await _userRepository.FindUserByUserNameAsync(id));

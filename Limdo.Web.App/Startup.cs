@@ -70,7 +70,7 @@ namespace Limdo.Web.App
                      {
                          var identity = TokenValidatedContext.Principal.Identity as ClaimsIdentity;
 
-                         var subjectClaims = identity.Claims.FirstOrDefault(c => c.Type.Equals("sub"));
+                         var subjectClaims = identity.Claims.FirstOrDefault(c => string.Compare(c.Type, "sid", true) == 0);
 
 
                          var newClaimsIdentity = new ClaimsIdentity("AuthenticationScheme",

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Limdo.Data;
@@ -35,7 +33,7 @@ namespace Limdo.Web.Api.Controllers
         }
 
         // GET: api/PcoLicenceDetails
-        [HttpGet]
+        [HttpGet("GetPcoDetails")]
         public async Task<IEnumerable<PcoLicenceDetailDto>> GetPcoDetails()
         {
             return _mapper.Map<IEnumerable<PcoLicenceDetailDto>>(await _pcoLicenceDetailRepository.FindAllAsync());
@@ -43,7 +41,7 @@ namespace Limdo.Web.Api.Controllers
         }
 
         // GET: api/PcoLicenceDetails/5
-        [HttpGet("{id}")]
+        [HttpGet("GetPcoLicenceDetail/{id}")]
         public async Task<ActionResult<PcoLicenceDetailDto>> GetPcoLicenceDetail(string id)
         {
             var pcoLicenceDetail = _mapper.Map<PcoLicenceDetailDto>(await _pcoLicenceDetailRepository.FindAsync(id));
@@ -57,10 +55,24 @@ namespace Limdo.Web.Api.Controllers
             return pcoLicenceDetail;
         }
 
+        [HttpGet("GetPcoLicenceDetailByAppUserId/{id}")]
+        public async Task<ActionResult<PcoLicenceDetailDto>> GetPcoLicenceDetailByAppUserId(string id)
+        {
+            var pcoLicenceDetail = _mapper.Map<PcoLicenceDetailDto>(await _pcoLicenceDetailRepository.FindPldByAppUserId(id));
+            //var pcoLicenceDetail = await _context.PcoDetails.FindAsync(id);
+
+            if (pcoLicenceDetail == null)
+            {
+                return NotFound();
+            }
+
+            return pcoLicenceDetail;
+        }
+
         // PUT: api/PcoLicenceDetails/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpPut("PutPcoLicenceDetail/{id}")]
         public async Task<IActionResult> PutPcoLicenceDetail(string id, PcoLicenceDetail pcoLicenceDetail)
         {
             if (id != pcoLicenceDetail.PcoId)
@@ -92,17 +104,27 @@ namespace Limdo.Web.Api.Controllers
         // POST: api/PcoLicenceDetails
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPost("PostPcoLicencesDetails/PostPcoLicenceDetail")]
         [HttpPost]
         public async Task<ActionResult<PcoLicenceDetail>> PostPcoLicenceDetail(PcoLicenceDetail pcoLicenceDetail)
         {
-            _context.PcoDetails.Add(pcoLicenceDetail);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.PcoDetails.Add(pcoLicenceDetail);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPcoLicenceDetail", new { id = pcoLicenceDetail.PcoId }, pcoLicenceDetail);
+                return CreatedAtAction("GetPcoLicenceDetail", new { id = pcoLicenceDetail.PcoId }, pcoLicenceDetail);
+            }
+            catch (System.Exception ex)
+            {
+                var errMsg = ex.Message;
+                throw;
+            }
+
         }
 
         // DELETE: api/PcoLicenceDetails/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeletePcoLicenceDetail/{id}")]
         public async Task<ActionResult<PcoLicenceDetail>> DeletePcoLicenceDetail(string id)
         {
             var pcoLicenceDetail = await _context.PcoDetails.FindAsync(id);

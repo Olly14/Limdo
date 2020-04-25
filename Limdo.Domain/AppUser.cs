@@ -47,6 +47,7 @@ namespace Limdo.Domain
 
         public virtual User User { get; set; }
 
+        [NotMapped]
         public virtual PcoLicenceDetail PcoLicenceDetail { get; set; }
 
         [NotMapped]

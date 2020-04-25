@@ -274,6 +274,7 @@ C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Deb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.TagHelpers.input.cache
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.TagHelpers.output.cache
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.RazorCoreGenerate.cache
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\AccessDenied.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Create.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Details.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Edit.cshtml.g.cs
@@ -281,6 +282,7 @@ C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Deb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\PcoLicencesDetails\Create.cshtml.g.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\PcoLicencesDetails\Edit.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\PcoLicencesDetails\Index.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Registrations\Details.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Registrations\Edit.cshtml.g.cs
@@ -299,4 +301,3 @@ C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Deb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.dll
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.pdb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.genruntimeconfig.cache
-C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\PcoLicencesDetails\Edit.cshtml.g.cs

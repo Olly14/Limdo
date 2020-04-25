@@ -12,8 +12,6 @@ using Limdo.Web.Api.DtoModels;
 using Limdo.Domain;
 using Limdo.Data.Infrastructure.Repositories;
 using System.Threading;
-using Microsoft.AspNetCore.Components;
-//using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Limdo.Web.Api.Controllers
 {
@@ -86,13 +84,13 @@ namespace Limdo.Web.Api.Controllers
         // PUT: api/AppUsers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAppUser(string id, AppUserDto appUser)
+        [HttpPut("PutAppUser")]
+        public async Task<IActionResult> PutAppUser(AppUserDto appUser)
         {
-            if (id != appUser.AppUserId)
-            {
-                return BadRequest();
-            }
+            //if (id != appUser.AppUserId)
+            //{
+            //    return BadRequest();
+            //}
 
             _context.Entry(appUser).State = EntityState.Modified;
 
@@ -102,14 +100,14 @@ namespace Limdo.Web.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppUserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                //if (!AppUserExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return NoContent();

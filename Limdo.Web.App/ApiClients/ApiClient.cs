@@ -165,6 +165,7 @@ namespace Limdo.Web.App.ApiClients
             throw new NotImplementedException();
         }
 
+
         public async Task PutAsync<T>(string uri, T updatedItem)
         {
             var message =
@@ -173,7 +174,7 @@ namespace Limdo.Web.App.ApiClients
                     Content = new StringContent(JsonConvert.SerializeObject(updatedItem), Encoding.UTF8,
                         "application/json")
                 };
-            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
+            //message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
 
 
 

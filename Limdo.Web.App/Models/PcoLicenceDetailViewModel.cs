@@ -8,8 +8,9 @@ namespace Limdo.Web.App.Models
 {
     public class PcoLicenceDetailViewModel
     {
-        [Display(Name = "Licence Number")]
         public string PcoId { get; set; }
+        [Display(Name = "Licence Number")]
+        public string PcoLicenceId { get; set; }
 
         [Display(Name = "Expire Date")]
         public string ExprireDate { get; set; }

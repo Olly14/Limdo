@@ -4,14 +4,16 @@ using Limdo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Limdo.Web.Api.Migrations
 {
     [DbContext(typeof(LimdoDbContext))]
-    partial class LimdoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200424111023_addColumnPcoliDetailMgr")]
+    partial class addColumnPcoliDetailMgr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,6 +123,7 @@ namespace Limdo.Web.Api.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ExprireDate")
@@ -134,7 +137,8 @@ namespace Limdo.Web.Api.Migrations
 
                     b.HasKey("PcoId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("PcoDetails");
                 });
@@ -253,8 +257,10 @@ namespace Limdo.Web.Api.Migrations
             modelBuilder.Entity("Limdo.Domain.PcoLicenceDetail", b =>
                 {
                     b.HasOne("Limdo.Domain.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
+                        .WithOne("PcoLicenceDetail")
+                        .HasForeignKey("Limdo.Domain.PcoLicenceDetail", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Limdo.Domain.UserClaim", b =>

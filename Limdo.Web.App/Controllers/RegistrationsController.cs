@@ -9,6 +9,7 @@ using Limdo.Web.App.DtoModels;
 using Limdo.Web.App.HttpService;
 using Limdo.Web.App.Models;
 using Limdo.Web.App.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,7 @@ namespace Limdo.Web.App.Controllers
         private const string Base_AppUserUri = "AppUsers";
         private const string AppUsers_Post = "AppUsers/PostAppUser";
         private const string Base_GetAppUserUri = "AppUsers/GetByAppUserId";
+        private const string AppUsers_Put = "AppUsers/PutAppUser";
 
         private readonly IMapper _mapper;
         private readonly IApiClient _apiClient;
@@ -52,7 +54,6 @@ namespace Limdo.Web.App.Controllers
             model.Username = model.Email;
             var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Registration_BaseUri);
 
-
             if (ModelState.IsValid)
             {
                 model.Password = PasswordBaseKeyDerivationFunction.HashPassword(model.Password);
@@ -69,6 +70,7 @@ namespace Limdo.Web.App.Controllers
 
         // GET: CustomerRelationshipMgms/Details/5
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> Details(string id)
         {
 
@@ -81,6 +83,86 @@ namespace Limdo.Web.App.Controllers
 
             return View(appUser);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Create(string id)
+        {
+            var path = string.Format("{0}/{1}", Registration_EmailUri, id);
+            var user = await _apiClient.GetAsync<UserDto>(path);
+
+            var newUser = new AppUserViewModel();
+            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+            return View(newUser);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<ActionResult> Create(AppUserViewModel model)
+        {
+            var path = string.Format("{0}/{1}", Registration_BaseUri, model);
+            var user = await _apiClient.PostAsync<UserDto>(path, _mapper.Map<UserDto>(model));
+
+            var newUser = new AppUserViewModel();
+            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+            return View(newUser);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Edit(string id)
+        {
+            await PopulateViewBagsAsync();
+            
+            var path = string.Format("{0}/{1}", Registration_BaseUri, id);
+            var user = await _apiClient.GetAsync<UserDto>(path);
+
+            var newUser = new AppUserViewModel();
+            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
+            newUser.DisplayName = id;
+            return View(newUser);
+        }
+
+        // POST: CustomerRelationshipMgms/Edit/5
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(AppUserViewModel model)
+        {
+
+            var userPath = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(model.UriKey));
+            var user = _mapper.Map<UserViewModel>(await _apiClient.GetAsync<UserDto>(userPath));
+
+
+
+            try
+            {
+                var redirectUrlParam = model.UriKey;
+                var path = string.Format("{0}", AppUsers_Put);
+                //model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
+                model.CreatedDate = DateTime.UtcNow;
+                model.ModifiedDate = DateTime.UtcNow;
+                model.GenderId = GuidEncoder.Decode(model.GenderId).ToString();
+                model.CountryId = GuidEncoder.Decode(model.CountryId).ToString();
+
+                if (ModelState.IsValid)
+                {
+                    model.User = user;
+                    await _apiClient.PutAsync(path, _mapper.Map<AppUserDto>(model));
+                    return RedirectToAction("Details", new {id = redirectUrlParam});
+                }
+                // TODO: Add update logic here
+
+                return View();
+            }
+            catch(Exception ex)
+            {
+                var msgError = ex.Message;
+                return View();
+            }
+        }
+
 
         private async Task<AppUserViewModel> PopulateCountryGenderIdsValuesAsync(AppUserViewModel appUser)
         {
@@ -97,88 +179,11 @@ namespace Limdo.Web.App.Controllers
             return appUser;
         }
 
-        private  AppUserViewModel GetGenderIdValue(IEnumerable<GenderViewModel> genders, AppUserViewModel appUser)
+        private AppUserViewModel GetGenderIdValue(IEnumerable<GenderViewModel> genders, AppUserViewModel appUser)
         {
-            appUser.GenderIdValue = genders.FirstOrDefault(g =>  string.Compare(g.GenderId, appUser.GenderId, true) == 0 ).Type;
+            appUser.GenderIdValue = genders.FirstOrDefault(g => string.Compare(g.GenderId, appUser.GenderId, true) == 0).Type;
             return appUser;
         }
-
-        [HttpGet]
-        public async Task<ActionResult> Create(string id)
-        {
-            var path = string.Format("{0}/{1}", Registration_EmailUri, id);
-            var user = await _apiClient.GetAsync<UserDto>(path);
-
-            var newUser = new AppUserViewModel();
-            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
-            return View(newUser);
-        }
-
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public async Task<ActionResult> Create(AppUserViewModel model)
-        {
-            var path = string.Format("{0}/{1}", Registration_BaseUri, model);
-            var user = await _apiClient.PostAsync<UserDto>(path, _mapper.Map<UserDto>(model));
-
-            var newUser = new AppUserViewModel();
-            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
-            return View(newUser);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Edit(string id)
-        {
-            await PopulateViewBagsAsync();
-
-
-            var path = string.Format("{0}/{1}", Registration_UserUri, id);
-            var user = await _apiClient.GetAsync<UserDto>(path);
-
-            var newUser = new AppUserViewModel();
-            newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
-            newUser.DisplayName = id;
-            return View(newUser);
-        }
-
-        // POST: CustomerRelationshipMgms/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(AppUserViewModel model)
-        {
-
-            var userPath = string.Format("{0}/{1}", User_ByUserIdUri, GuidEncoder.Decode(model.UriKey));
-            var user = _mapper.Map<UserViewModel>(await _apiClient.GetAsync<UserDto>(userPath));
-
-
-
-            try
-            {
-                var redirectUrlParam = model.UriKey;
-                var path = string.Format("{0}{1}", HttpClientProvider.HttpClient.BaseAddress, Base_AppUserUri);
-                //model.SubjectId = GuidEncoder.Decode(model.UriKey).ToString();
-                model.CreatedDate = DateTime.UtcNow;
-                model.ModifiedDate = DateTime.UtcNow;
-                model.GenderId = GuidEncoder.Decode(model.GenderId).ToString();
-                model.CountryId = GuidEncoder.Decode(model.CountryId).ToString();
-
-                if (ModelState.IsValid)
-                {
-                    model.User = user;
-                    var result = await _apiClient.PostAsync(path, _mapper.Map<AppUserDto>(model));
-                    return RedirectToAction("Details", new {id = redirectUrlParam});
-                }
-                // TODO: Add update logic here
-
-                return View();
-            }
-            catch(Exception ex)
-            {
-                var msgError = ex.Message;
-                return View();
-            }
-        }
-
 
 
 

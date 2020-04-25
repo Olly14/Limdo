@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Limdo.Web.App.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CustomerRelationshipMgmsController : Controller
     {
         private const string BaseUri = "AppUsers";
@@ -52,6 +52,8 @@ namespace Limdo.Web.App.Controllers
 
             var path = string.Format("{0}/{1}", BaseUri, decodedId);
             var user = await AppUserAsync(path);
+            user.UriKey = GuidEncoder.Encode(user.AppUserId);
+            user = await PopulateCountryGenderIdsValuesAsync(user);
             return View(user);
         }
         
@@ -93,6 +95,7 @@ namespace Limdo.Web.App.Controllers
 
             var path = string.Format("{0}/{1}", BaseUri, decodedId);
             var user = await AppUserAsync(path);
+            
             return View(user);
         }
 
