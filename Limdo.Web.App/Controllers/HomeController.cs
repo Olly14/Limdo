@@ -31,6 +31,17 @@ namespace Limdo.Web.App.Controllers
             return View();
         }
 
+        public async Task<IActionResult> About()
+        {
+            var currentContext = _httpContectAccessor.HttpContext;
+
+            var IdentityToken = await currentContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+
+            ViewBag.Message = "London Independent Minicab Organisation";
+            ViewBag.Title = "About Limdo";
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

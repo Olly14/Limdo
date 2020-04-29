@@ -89,7 +89,7 @@
     var resetConfirmedPasswordInput = function () {
 
         $('#ConfirmedPasswordInputId').removeClass("errorBox")
-        $('.ConfirmedPasswordInputErrorId').hide();
+        $('.ConfirmedPasswordInputError').hide();
     }
 
     var onEmailInputFocusKeyPressedAndBackspace = function (event) {

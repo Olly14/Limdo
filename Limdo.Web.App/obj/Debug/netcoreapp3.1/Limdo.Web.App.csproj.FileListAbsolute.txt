@@ -153,3 +153,4 @@ C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Deb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.pdb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.genruntimeconfig.cache
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\WelcomeNewUser.cshtml.g.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs

@@ -1,0 +1,34 @@
+﻿.titleDiv {
+    margin-bottom:3px;
+    min-height:50px;
+    background-color:lightskyblue;
+    text-align:center;
+    font-size:large;
+
+}
+.aboutPage {
+    background-image: url('../limdopics/limdo2towerbridge.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.messageDiv {
+    margin-bottom: 3px;
+    min-height: 50px;
+    background-color: mediumpurple;
+    text-align: center;
+    font-size: large;
+}
+.homePage {
+    min-height: 500px;
+    background-image: url('../limdopics/limdo4male.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+}
+.pDiv{
+    background-color:aquamarine;
+}
+
