@@ -84,7 +84,8 @@ namespace Limdo.Web.App.Controllers
             var newUser = new AppUserViewModel();
             newUser.UriKey = GuidEncoder.Encode(user.SubjectId);
             newUser.DisplayName = emailId;
-            return View(newUser);
+            newUser.UiControl = "Create";
+            return View("CreateEdit", newUser);
         }
 
         // POST: CustomerRelationshipMgms/Create
@@ -134,6 +135,7 @@ namespace Limdo.Web.App.Controllers
             var user = await AppUserAsync(path);
             user.UriKey = GuidEncoder.Encode(user.AppUserId);
             user.SubjectId = GuidEncoder.Encode(user.SubjectId);
+            user.UiControl = "Edit";
             return View(user);
         }
 

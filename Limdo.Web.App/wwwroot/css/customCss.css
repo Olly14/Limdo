@@ -22,12 +22,23 @@
 }
 .homePage {
     min-height: 500px;
+    background-image: url('../limdopics/limdofemaledriver.jpg');
+    /*background-image: url('../limdopics/limdo4male.png');*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+}
+
+.welcomePage {
+    min-height: 500px;
     background-image: url('../limdopics/limdo4male.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-size: 100% 100%;
 }
+
 .pDiv{
     background-color:aquamarine;
 }

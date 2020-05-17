@@ -61,6 +61,8 @@ namespace Limdo.Web.App.Models
         public virtual ICollection<string> Roles { get; set; }
         public virtual ICollection<string> Claims { get; set; }
 
+        public string UiControl { get; set; }
+
         public string DisplayName { get; set; }
     }
 }

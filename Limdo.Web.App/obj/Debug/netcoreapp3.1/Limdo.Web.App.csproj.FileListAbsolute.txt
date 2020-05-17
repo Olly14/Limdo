@@ -126,7 +126,6 @@ C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Deb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.TagHelpers.output.cache
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.RazorCoreGenerate.cache
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\AccessDenied.cshtml.g.cs
-C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Create.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Details.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Edit.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\Index.cshtml.g.cs
@@ -154,3 +153,7 @@ C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Deb
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Limdo.Web.App.genruntimeconfig.cache
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\WelcomeNewUser.cshtml.g.cs
 C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutHome.cshtml.g.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAbout.cshtml.g.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutWelcome.cshtml.g.cs
+C:\Users\Olayinka.Ayoola\source\repos\OllyProjectsSolution\Limdo.Web.App\obj\Debug\netcoreapp3.1\Razor\Views\CustomerRelationshipMgms\CreateEdit.cshtml.g.cs
